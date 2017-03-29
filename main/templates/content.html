@@ -1,19 +1,18 @@
 {% extends "base.html" %}
+{% import "_macros.html" as macros %}
 
 {% block content %}
 
-    <h1>Latest VPR Stories</h1>
+    <h2>Latest VPR Stories</h2>
 
-    <h2>Test Headline One</h2>
-    <h3>Test Byline One<h3>
-    <h4>Test Story One</h4>
+    {% for story in stories %}
+      <p>{{ story.title }}, {{ story.date }}</p>
+        {% if story.audio %}
+          {{ macros.player(story.audio.mp3, story.audio.duration, "") }}
+        {% else %}
+          <p>No Audio.</p>
+        {% endif %}
+    {% endfor %}
 
-    <h2>Test Headline Two</h2>
-    <h3>Test Byline Two<h3>
-    <h4>Test Story Two</h4>
-
-    <h2>Test Headline Three</h2>
-    <h3>Test Byline Three<h3>
-    <h4>Test Story Three</h4>
 
 {% endblock %}

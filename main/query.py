@@ -23,7 +23,6 @@ def api_feed(tag, numResults=1, char_limit=240, thumbnail=False, sidebar=False):
         title = story['title']['$text'].strip()
         byline = {}
         byline['name'] = story['byline'][0]['name']['$text']
-        byline['url'] = story['byline'][0]['link'][0]['$text']
 
         try:  # if there's an image, determine orientation and define boundary
             image = True
@@ -65,15 +64,6 @@ def api_feed(tag, numResults=1, char_limit=240, thumbnail=False, sidebar=False):
 
         text = full_text[:paragraphs_needed]
 
-        if thumbnail and image:
-            try:
-                if sidebar:
-                    image = generate_thumbnail(image_url, preserve_ratio=True, size=(326, 326))
-                else:
-                    image = generate_thumbnail(image_url, preserve_ratio=True, size=(width, height))
-            except KeyError:
-                print image_url
-                image = False
 
         story_list.append({
             'title': title,
