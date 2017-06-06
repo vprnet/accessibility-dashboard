@@ -22,7 +22,8 @@ def api_feed(tag, numResults=1, char_limit=240, thumbnail=False, sidebar=False):
         date = convert_date(story['storyDate']['$text'])
         title = story['title']['$text'].strip()
         byline = {}
-        byline['name'] = story['byline'][0]['name']['$text']
+        byline['name'] = story['byline'][0]['name']['$text'].strip()
+
 
         try:  # if there's an image, determine orientation and define boundary
             image = True
