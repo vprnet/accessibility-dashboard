@@ -3,16 +3,17 @@
 
 {% block content %}
 
-    <h2>Latest VPR Stories</h2>
-
+<div itemscope itemtype="http://schema.org/Article">
+  <h1 itemprop="genre">Latest VPR Stories</h1>
     {% for story in stories %}
-      <p>{{ story.title }}, {{ story.date }}</p>
+      <h2 itemprop="headline">{{ story.title }}</h2>
+      <h2 itemprop="datePublished">{{ story.date }}</h2>
         {% if story.audio %}
-          {{ macros.player(story.audio.mp3, story.audio.duration, "") }}
+          <link itemprop="audio"> {{ macros.player(story.audio.mp3, story.audio.duration, "") }}
         {% else %}
-          <p>No Audio.</p>
+          <h2>No Audio.</h2>
         {% endif %}
     {% endfor %}
-
+</div>
 
 {% endblock %}
