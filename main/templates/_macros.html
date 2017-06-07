@@ -1,6 +1,0 @@
-{% macro player(file, duration, copy) %}
-  <div class="audio_player">
-    <span class="duration">{% if duration|int > 59 %}{{ duration|int // 60 }} minutes {% endif %}{{ duration|int % 60 }} seconds</span>
-    <a class="audio_play" href="{{ file }}"><audio src="{{ file }}" preload="auto" type="audio/mpeg"></audio>Listen</a>
-  </div>
-{% endmacro %}

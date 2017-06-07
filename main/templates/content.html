@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% import "_macros.html" as macros %}
 
 {% block content %}
 
@@ -10,17 +9,11 @@
 
       <div itemscope itemtype="http://schema.org/Article">
 
-        {% for story in stories %}
+        {% for story in stories if story.audio %}
           <h2 itemprop="headline">{{ story.title }}</h2>
-          <h3 itemprop="author">by {{ story.byline.name }}</h3>
+          <h3 itemprop="author">{{ story.byline.name }}</h3>
           <h3 itemprop="datePublished">{{ story.date }}</h3>
-
-          {% if story.audio %}
-            <h4><link itemprop="audio"> {{ macros.player(story.audio.mp3, story.audio.duration, "") }}</h4>
-          {% else %}
-            <h4>No Audio.</h4>
-            <!-- still need to handle this somehow... if there's not audio, a note about it? full text? -->
-          {% endif %}
+          <h4><a href={{ story.audio['mp3'] }} itemprop="audio">Listen</a></h4>
         {% endfor %}
 
       </div>
